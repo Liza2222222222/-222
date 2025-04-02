@@ -111,7 +111,6 @@ namespace ИС_салона222
             {
 
                 ShowClienttInGrid("select id, name,description from services;");
-                //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
             }
             catch
@@ -119,7 +118,6 @@ namespace ИС_салона222
                 MessageBox.Show("Ошибка подключения к БД!", "Предупреждение!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
-            //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
         }
 
         
