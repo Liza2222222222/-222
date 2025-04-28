@@ -149,34 +149,47 @@ namespace ИС_салона222
         {
             if (string.IsNullOrWhiteSpace(servicesBox.Text) ||
         string.IsNullOrWhiteSpace(workerBox.Text) ||
-        string.IsNullOrWhiteSpace(dataTimeBox.Text))
+        string.IsNullOrWhiteSpace(dateTimePicker.Text))
             {
                 MessageBox.Show("Заполните все поля!");
                 return;
             }
-            try
+            else
             {
-                // создаём объект для подключения к БД
-                MySqlConnection conn = new MySqlConnection(connStr);
-                // устанавливаем соединение с БД
-                conn.Open();
-                //создаем запрос обновления параметра бана и аутентификации
-                //проблемы с изменеием аутентификации
-                string query = $"insert into sign_up (services, worker, data_time) value ('{servicesBox.Text}', '{workerBox.Text}', '{dataTimeBox.Text}');";
-                MySqlCommand command = new MySqlCommand(query, conn);
-                // выполняем запрос
-                command.ExecuteNonQuery();
-                conn.Close();
-                MessageBox.Show("Новая запись создана!", "База данных пользователей!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Не получилось создать новую запись!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                try
+                {
+                    // создаём объект для подключения к БД
+                    MySqlConnection conn = new MySqlConnection(connStr);
+                    // устанавливаем соединение с БД
+                    conn.Open();
+                    //создаем запрос обновления параметра бана и аутентификации
+                    //проблемы с изменеием аутентификации
+                    string query = $"insert into sign_up (services, worker, data_time) value ('{servicesBox.Text}', '{workerBox.Text}', '{dateTimePicker.Text}');";
+                    MySqlCommand command = new MySqlCommand(query, conn);
+                    // выполняем запрос
+                    command.ExecuteNonQuery();
+                    conn.Close();
+                    MessageBox.Show("Новая запись создана!", "База данных пользователей!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Не получилось создать новую запись!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             servicesBox.Clear();
             workerBox.Clear();
-            dataTimeBox.Clear();
+            //dataTimeBox.Clear();
             
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            var dtp = sender as DateTimePicker;
+            if (!dtp.ShowCheckBox || dtp.Checked)
+                dtp.CustomFormat = "yyyy-MM-dd HH:mm";
+            else
+                dtp.CustomFormat = "''";
         }
     }
 }
